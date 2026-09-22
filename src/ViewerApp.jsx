@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BookOpen, Building2, FileText, ChevronRight, ArrowLeft, ExternalLink, Search, RefreshCw, AlertCircle, Loader2 } from 'lucide-react';
 
 // --- Config: your Apps Script web app URL ---
-const SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyELVNLYVFg8aofn9MQTmYiVLvaenkuJlUkyzF4fqGguTMLsfE5fK3bAmRCwmoyGlF-/exec';
+const SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxYGhfrU3UkxJlZ4gIf1ofkymtruSCih7t7Oad8MnBfYNuZAJF2StCFBt0wZgLPmiZI/exec';
 
 /**
  * Maps a raw Google Sheet row object to a Thesis object.

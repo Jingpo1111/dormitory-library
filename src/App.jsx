@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { INITIAL_THESES, INITIAL_DEPARTMENTS } from './data/initialData';
 import { exportToCSV, postThesis } from './utils/googleSheets';
 import { Header } from './components/Header';
@@ -8,18 +8,8 @@ import { AddEditModal } from './components/AddEditModal';
 import { Toast } from './components/Toast';
 
 export default function App() {
-  // Saved Thesis Data
-  const [theses, setTheses] = useState(() => {
-    const saved = localStorage.getItem('dorm_thesis_table');
-    if (saved) {
-      try { return JSON.parse(saved); } catch (e) { return INITIAL_THESES; }
-    }
-    return INITIAL_THESES;
-  });
-
-  useEffect(() => {
-    localStorage.setItem('dorm_thesis_table', JSON.stringify(theses));
-  }, [theses]);
+  // Thesis Data — always starts from initialData.js
+  const [theses, setTheses] = useState(INITIAL_THESES);
 
   // Selected Department State (null = show all departments, string = selected department)
   const [selectedDepartment, setSelectedDepartment] = useState(null);

@@ -4,7 +4,7 @@ export const INITIAL_DEPARTMENTS = [
   'AMS',
   'GCI',
   'GAR',
-  'GIT',
+  'GTI',
   'GEE',
   'GIM',
   'GRU',
@@ -22,7 +22,7 @@ export const INITIAL_THESES = [
   {
     id: 'thesis-2',
     department: 'GEE',
-    titleThesis: 'Distributed Consensus Protocols in Decentralized Management Systems',
-    linkPdf: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+    titleThesis: 'ការសិក្សាប្រព័ន្ធសូឡាហាយប្រ៊ីតលើដំបូលចំណតឡាន',
+    linkPdf: 'https://drive.google.com/file/d/1_Bksq6j9dGFGvuyAO-hepruiqPyb-mnH/view'
   }
 ];

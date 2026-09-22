@@ -184,13 +184,12 @@ export const exportToCSV = (theses) => {
 // -------------------------------------------------------------------
 // POST helper to send a single thesis row to the Apps Script endpoint
 // -------------------------------------------------------------------
-export const SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyELVNLYVFg8aofn9MQTmYiVLvaenkuJlUkyzF4fqGguTMLsfE5fK3bAmRCwmoyGlF-/exec';
+export const SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxYGhfrU3UkxJlZ4gIf1ofkymtruSCih7t7Oad8MnBfYNuZAJF2StCFBt0wZgLPmiZI/exec';
 
 /**
- * Sends a thesis object to the Apps Script endpoint via POST.
- * Uses no-cors + text/plain to avoid CORS preflight that Google Apps Script
- * cannot handle. The response is opaque, so we assume success if fetch
- * doesn't throw a network error.
+ * Sends a thesis to the Apps Script endpoint via GET query params.
+ * Google Apps Script redirects (302) on requests, which causes POST bodies
+ * to be dropped. Using GET with URL params avoids this entirely.
  * @param {string} rawUrl - optional Apps Script URL; defaults to SHEET_WEBAPP_URL.
  * @param {object} thesis - { department, titleThesis, linkPdf }
  */
@@ -198,12 +197,12 @@ export const postThesis = async (rawUrl = SHEET_WEBAPP_URL, thesis) => {
   const endpoint = formatGoogleSheetUrl(rawUrl);
   if (!endpoint) throw new Error('Invalid Apps Script URL');
 
-  await fetch(endpoint, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify(thesis),
+  const params = new URLSearchParams({
+    action: 'addThesis',
+    department: thesis.department || '',
+    titleThesis: thesis.titleThesis || '',
+    linkPdf: thesis.linkPdf || '',
   });
-  // With no-cors the response is opaque (status 0) — we can't read it.
-  // If fetch() itself didn't throw, the request was sent successfully.
+
+  await fetch(`${endpoint}?${params.toString()}`, { mode: 'no-cors' });
 };

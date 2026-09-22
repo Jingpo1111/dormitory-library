@@ -9,7 +9,7 @@ export const AddEditModal = ({
   editingThesis 
 }) => {
   const [formData, setFormData] = useState({
-    department: 'Computer Engineering',
+    department: INITIAL_DEPARTMENTS[0] || '',
     titleThesis: '',
     linkPdf: ''
   });
@@ -17,15 +17,15 @@ export const AddEditModal = ({
   useEffect(() => {
     if (editingThesis) {
       setFormData({
-        department: editingThesis.department || 'Computer Engineering',
+        department: editingThesis.department || INITIAL_DEPARTMENTS[0] || '',
         titleThesis: editingThesis.titleThesis || '',
         linkPdf: editingThesis.linkPdf || ''
       });
     } else {
       setFormData({
-        department: 'Computer Engineering',
+        department: INITIAL_DEPARTMENTS[0] || '',
         titleThesis: '',
-        linkPdf: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+        linkPdf: ''
       });
     }
   }, [editingThesis, isOpen]);
